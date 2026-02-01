@@ -1,0 +1,68 @@
+/invoice-system-root
+│
+├── /config                  <-- CONFIGURATION
+│   ├── database.php         (DB Connection)
+│   ├── constants.php        (Defines BASE_URL - The "Magic Key")
+│   └── session.php          (Middleware: Checks login & permissions)
+│
+├── /controllers             <-- LOGIC & PROCESSING
+│   ├── AuthController.php   (Handles Login for ALL roles + Register for Company)
+│   ├── CompanyController.php(Superadmin: Manage Companies/Plans)
+│   ├── InvoiceController.php(Admin/Staff: CRUD | Client: View Only)
+│   └── PortalController.php (Client specific logic)
+│
+├── /views                   <-- USER INTERFACE
+│   │
+│   ├── /layouts             <-- SHARED DESIGN
+│   │   ├── header.php
+│   │   ├── footer.php
+│   │   ├── sidebar.php      (Smart sidebar: Changes based on Role)
+│   │   └── nav-client.php   (Simplified top-bar for Clients)
+│   │
+│   ├── /auth                <-- AUTHENTICATION
+│   │   ├── login.php        (One login page for EVERYONE)
+│   │   ├── register.php     (Public: Registers a NEW Company + Admin)
+│   │   └── recover.php
+│   │
+│   ├── /dashboard           <-- LANDING PAGES (Role Redirects)
+│   │   ├── superadmin.php   (Global Stats: Total Revenue, Total Companies)
+│   │   ├── admin.php        (Company Stats: Sales, Expenses)
+│   │   ├── staff.php        (Personal Stats: Tasks, Recent Invoices)
+│   │   └── client.php       (Client Stats: Due Amount, Recent Invoices)
+│   │
+│   ├── /companies           <-- SUPERADMIN FEATURE
+│   │   ├── list.php         (View all registered companies)
+│   │   ├── plans.php        (Manage Subscription Packages)
+│   │   └── verify.php       (Approve/Block Companies)
+│   │
+│   ├── /invoices            <-- SHARED FEATURE (Admin, Staff, Client)
+│   │   ├── create.php       (Admin/Staff Only)
+│   │   ├── manage.php       (Admin/Staff Only)
+│   │   ├── view.php         (ALL Roles: The printable invoice)
+│   │   └── pay.php          (Client Only: Payment Gateway)
+│   │
+│   ├── /clients             <-- SHARED FEATURE (Admin & Staff)
+│   │   ├── add.php
+│   │   └── manage.php
+│   │
+│   ├── /products            <-- SHARED FEATURE (Admin & Staff)
+│   │   ├── add.php
+│   │   └── manage.php
+│   │
+│   ├── /staff               <-- ADMIN ONLY
+│   │   ├── add.php          (Create Staff accounts)
+│   │   └── manage.php
+│   │
+│   └── /portal              <-- CLIENT SPECIFIC
+│       ├── my-invoices.php  (Read-only list for clients)
+│       └── profile.php      (Update client address/password)
+│
+├── /assets                  <-- PUBLIC
+│   ├── css/
+│   ├── js/
+│   └── uploads/
+│       ├── company_logos/   (Stores Admin's logos)
+│       └── avatars/
+│
+├── index.php                (Router)
+└── .htaccess
