@@ -1,0 +1,1348 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 01, 2026 at 07:25 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `invoice_management`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `audit_logs`
+--
+
+CREATE TABLE `audit_logs` (
+  `log_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(100) DEFAULT NULL,
+  `user_role` varchar(20) DEFAULT NULL,
+  `action` varchar(50) NOT NULL,
+  `details` text DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `audit_logs`
+--
+
+INSERT INTO `audit_logs` (`log_id`, `user_id`, `user_name`, `user_role`, `action`, `details`, `ip_address`, `user_agent`, `created_at`) VALUES
+(1, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 08:32:52'),
+(2, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 08:39:19'),
+(3, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 08:39:22'),
+(4, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 09:00:11'),
+(5, 12, 'GGG', 'staff', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 09:00:17'),
+(6, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 09:04:29'),
+(7, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 09:04:33'),
+(8, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 10:07:08'),
+(9, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 10:10:47'),
+(10, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 10:11:35'),
+(11, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 10:16:19'),
+(12, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 10:16:32'),
+(13, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 10:18:19'),
+(14, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 10:18:36'),
+(15, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 10:21:29'),
+(16, 0, 'System / Guest', 'guest', 'UPDATE_PROFILE', 'User changed their password', '::1', NULL, '2026-01-26 10:26:22'),
+(17, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 10:28:15'),
+(18, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-26 10:28:21'),
+(19, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-26 10:28:26'),
+(20, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-27 04:44:32'),
+(21, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-27 09:57:34'),
+(22, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-27 10:11:04'),
+(23, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-27 10:11:09'),
+(24, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 13:45:24'),
+(25, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 13:48:23'),
+(26, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 13:48:33'),
+(27, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 13:53:04'),
+(28, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 13:53:11'),
+(29, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 13:53:32'),
+(30, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 13:53:37'),
+(31, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 13:54:11'),
+(32, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 13:54:17'),
+(33, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:04:33'),
+(34, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:04:47'),
+(35, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:05:15'),
+(36, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:05:20'),
+(37, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:13:00'),
+(38, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:13:07'),
+(39, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:13:46'),
+(40, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:13:56'),
+(41, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:20:53'),
+(42, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:20:58'),
+(43, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:21:23'),
+(44, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:21:29'),
+(45, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:22:48'),
+(46, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:22:55'),
+(47, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:48:41'),
+(48, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:48:48'),
+(49, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:53:53'),
+(50, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:53:58'),
+(51, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 14:54:19'),
+(52, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 14:54:24'),
+(53, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 15:07:55'),
+(54, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 15:08:03'),
+(55, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 15:10:48'),
+(56, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 15:10:55'),
+(57, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 15:37:15'),
+(58, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 15:37:22'),
+(59, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 15:39:08'),
+(60, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 15:39:15'),
+(61, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 15:40:50'),
+(62, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 15:40:55'),
+(63, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 15:45:25'),
+(64, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 15:45:31'),
+(65, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 16:09:55'),
+(66, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 16:10:02'),
+(67, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 16:26:14'),
+(68, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 16:26:20'),
+(69, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-28 16:30:31'),
+(70, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-28 16:30:37'),
+(71, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 10:38:42'),
+(72, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 11:04:55'),
+(73, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 11:05:56'),
+(74, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 11:32:04'),
+(75, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-31 12:04:15'),
+(76, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 12:04:27'),
+(77, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-31 12:39:49'),
+(78, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 12:39:56'),
+(79, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-31 12:56:36'),
+(80, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 12:56:41'),
+(81, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-31 14:54:26'),
+(82, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 14:54:34'),
+(83, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-31 15:13:48'),
+(84, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 15:13:55'),
+(85, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-31 15:15:08'),
+(86, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 15:15:17'),
+(87, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-01-31 16:43:53'),
+(88, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-01-31 16:50:02'),
+(89, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-02-01 03:23:39'),
+(90, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-02-01 03:24:16'),
+(91, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-02-01 03:24:22'),
+(92, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-02-01 03:58:22'),
+(93, 12, 'GGG', 'staff', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-02-01 03:58:28'),
+(94, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-02-01 04:02:07'),
+(95, 9, 'MOBIS', 'client', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-02-01 04:02:17'),
+(96, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-02-01 04:02:34'),
+(97, 1, 'Gaurav', 'admin', 'LOGIN_SUCCESS', 'User logged in.', '::1', NULL, '2026-02-01 04:02:41'),
+(98, 0, 'System / Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', NULL, '2026-02-01 04:08:48'),
+(99, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User signed in: Gaurav [Role: superadmin]', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', '2026-02-01 04:16:14'),
+(100, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in: Gaurav (superadmin)', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', '2026-02-01 04:16:14'),
+(101, 0, 'System/Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', '2026-02-01 04:49:38'),
+(102, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User signed in: Gaurav [Role: superadmin]', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', '2026-02-01 04:49:42'),
+(103, 16, 'Gaurav', 'superadmin', 'LOGIN_SUCCESS', 'User logged in: Gaurav (superadmin)', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', '2026-02-01 04:49:42'),
+(104, 0, 'System/Guest', 'guest', 'LOGOUT_PROFILE', 'User Logout', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', '2026-02-01 04:49:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients`
+--
+
+CREATE TABLE `clients` (
+  `client_id` char(8) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `contact_person` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `gst_vat` varchar(50) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `street` varchar(100) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `postal_code` varchar(20) DEFAULT NULL,
+  `address` text NOT NULL,
+  `currency_id` char(8) NOT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `company_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`client_id`, `name`, `contact_person`, `phone`, `email`, `gst_vat`, `logo`, `street`, `city`, `state`, `country`, `postal_code`, `address`, `currency_id`, `status`, `created_at`, `company_id`) VALUES
+('05E81AEE', 'Marvel Tech Pvt. Ltd.', 'Mukesh', '07018502100', 'gauravspumca@gmail.com', 'DFOSDJFJMSKL51321', NULL, 'MANDI', 'MANDI', 'HIMACHAL PRADESH', 'India', '175001', 'MANDI', '3VRG0EFF', 'active', '2025-12-19 09:21:07', 12270123),
+('33JFZI92', 'Macinfo.Pvt.Ltd', 'Macal', '7018502325', 'gauravspumca@gmail.com', '2AzKkk25FKDJLKFJL05', NULL, 'USA', 'USA', 'California', 'USA', '152030', 'USA', '3VRG0EFF', 'active', '2025-12-15 09:48:45', 12270123),
+('5524AADE', 'MOBIS TECH', 'MOBIS', '4444444444444', 'MOBIS@GMAIL.COM', 'sdjkfsjlk5DDD56d', NULL, '123/10 Mandi', 'Mandi', 'Himachal Pradesh', 'India', '175001', '123/10 Mandi', '9GAMDPDF', 'active', '2026-01-17 13:46:19', 30043519),
+('6803BEA9', 'Tech Pvt. Ltd.', 'Gaurav', '8859696328', 'upstack222@info.in', '5555iiiiiiiiiiiiiiiii', NULL, '123/10 Mandi', 'Mandi', 'Himachal Pradesh', 'India', '175001', '123/10 Mandi', 'CUR693FA', 'active', '2026-01-17 13:23:23', 30043519),
+('69AEEBCA', 'GauravTech Pvt. Ltd.', 'Gaurav', '8859696320', 'gauravnic76@gmail.com', 'sdjkfsjlk56556656dfsdf', NULL, '123/10 Mandi', 'Mandi', 'Himachal Pradesh', 'India', '175001', '123/10 Mandi', 'CUR693FA', 'active', '2026-01-17 13:25:55', 30043519),
+('CLT_54A4', 'Mabus Pvt. Ltd.', 'Morgen', '8897950989', 'mabus@gmail.com', '536KDJMKMSMJ837374', NULL, 'USA 263 STREET CALIFORNIA', 'USA', 'USA', 'USA', '454333', 'USA 263 STREET CALIFORNIA', '3VRG0EFF', 'active', '2026-01-20 14:35:23', 30043519),
+('CLT_5FF1', 'lllllll', 'pppp', '8585858585858', 'pp@gmail.com', '545654658415465', NULL, 'UAE 132 STREET', 'UAE', 'UAE', 'UAE', '965252', 'UAE 132 STREET', '9GAMDPDF', 'active', '2026-01-21 04:30:28', 30043519);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `companies`
+--
+
+CREATE TABLE `companies` (
+  `company_id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `city` varchar(100) NOT NULL,
+  `state` varchar(100) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `postal_code` varchar(20) DEFAULT NULL,
+  `contact` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `gst_vat` varchar(50) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `smtp_user` varchar(255) DEFAULT NULL,
+  `smtp_pass` varchar(255) DEFAULT NULL,
+  `status` enum('active','suspended') DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`company_id`, `name`, `address`, `street`, `city`, `state`, `country`, `postal_code`, `contact`, `email`, `gst_vat`, `logo`, `created_by`, `created_at`, `updated_at`, `smtp_user`, `smtp_pass`, `status`) VALUES
+(12270123, 'Upstack Media Pvt. Ltd.', 'mandi', 'MANDI', 'MANDI', 'HIMACHAL PRADESH', 'India', '175001', '07018502321', 'upstack@gmail.com', '2AzKIM25FKDJLKFJL05', '../uploads/company_logos/logo_1765464675.jpg', 1, '2025-12-11 14:51:15', '2025-12-11 14:51:15', NULL, NULL, 'active'),
+(30043519, 'Upstack Media Pvt. Ltd.', 'mandi', 'MANDI', 'MANDI', 'HIMACHAL PRADESH', 'India', '175001', '07018566360', 'upstack@gmail.com', '2AzKIM25FKDJLKFJL06', 'logo_1769166503.png', 1, '2025-12-29 06:31:28', '2026-01-23 11:08:23', NULL, NULL, 'active'),
+(60891710, 'Web Tech Pvt. Ltd.', '145/7 Mandi', '123/10 Mandi', 'Mandi', 'Himachal Pradesh', 'India', '175001', '9858878560', 'webtech@info.in', 'sdjkfsjlFFFFFFFF', 'assets/uploads/company_logos/logo_1768843983.jpeg', 11, '2026-01-19 17:33:03', '2026-01-26 07:42:39', NULL, NULL, 'active'),
+(73939514, 'Upstack Media Pvt. Ltd.', 'mandi', 'MANDI', 'MANDI', 'HIMACHAL PRADESH', 'India', '175001', '8590652450', 'upstack@gmail.com', '2AzKIM25FKDJLKFJL08', '../uploads/company_logos/1766990659_PHOTO.jpeg', 1, '2025-12-29 06:28:37', '2025-12-29 06:44:19', '', '', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `contact_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `currencies`
+--
+
+CREATE TABLE `currencies` (
+  `currency_id` char(8) NOT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `code` varchar(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `symbol` varchar(5) NOT NULL,
+  `exchange_rate` decimal(12,6) NOT NULL DEFAULT 1.000000,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `currencies`
+--
+
+INSERT INTO `currencies` (`currency_id`, `company_id`, `code`, `name`, `symbol`, `exchange_rate`, `status`) VALUES
+('3VRG0EFF', 30043519, 'USD', 'United States dollar', '$', 83.250000, 'active'),
+('9GAMDPDF', 30043519, 'EUR', 'Euro', '€', 90.100000, 'active'),
+('ACBFEF73', 30043519, 'JPY', 'Japanese Yen', '¥', 0.560000, 'active'),
+('CUR693FA', 30043519, 'INR', 'Indian Rupees', '₹', 1.000000, 'active'),
+('FD6CAEA3', 30043519, 'ZAR', 'South African Rand', 'R', 5.300000, 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE `expenses` (
+  `expense_id` char(10) NOT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `amount` decimal(12,2) NOT NULL,
+  `currency_id` char(8) NOT NULL,
+  `expense_date` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`expense_id`, `company_id`, `category_id`, `description`, `amount`, `currency_id`, `expense_date`, `created_at`, `updated_at`) VALUES
+('AF90A80228', 30043519, 2, 'Cost of Production of Antivirus', 5.00, '3VRG0EFF', '2026-01-31', '2026-01-31 16:18:03', '2026-01-31 16:23:34'),
+('DCE400C669', 30043519, 1, 'service cost', 4.00, '3VRG0EFF', '2026-01-23', '2026-01-23 11:39:12', '2026-01-23 11:39:12'),
+('EXP550422', 30043519, 2, 'Cost of Production of Antivirus', 20.00, '3VRG0EFF', '2026-01-08', '2026-01-14 05:57:27', '2026-01-23 11:56:32'),
+('EXP686697', 30043519, 2, 'Cost of Production of Antivirus', 6.00, '3VRG0EFF', '2026-01-21', '2026-01-04 07:19:29', '2026-01-23 11:58:20'),
+('EXP686711', 30043519, 2, 'Cost of supply', 10.00, '3VRG0EFF', '2026-01-08', '2026-01-04 07:20:03', '2026-01-23 11:58:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expense_categories`
+--
+
+CREATE TABLE `expense_categories` (
+  `category_id` int(11) NOT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expense_categories`
+--
+
+INSERT INTO `expense_categories` (`category_id`, `company_id`, `name`) VALUES
+(1, 30043519, 'Production'),
+(2, 30043519, 'Office Supplies'),
+(4, 30043519, 'Teavel');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `invoice_id` char(8) NOT NULL,
+  `client_id` char(8) NOT NULL,
+  `currency_id` char(8) NOT NULL,
+  `exchange_rate` decimal(10,6) NOT NULL DEFAULT 1.000000,
+  `invoice_number` varchar(50) DEFAULT NULL,
+  `invoice_date` date NOT NULL,
+  `due_date` date DEFAULT NULL,
+  `subtotal` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `tax_total` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `discount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `grand_total` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `paid_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `payment_method` varchar(50) DEFAULT NULL,
+  `payment_reference` varchar(100) DEFAULT NULL,
+  `terms_conditions` text DEFAULT NULL,
+  `status` enum('unpaid','partial','paid') DEFAULT 'unpaid',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `outstanding_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `remarks` text DEFAULT NULL,
+  `payment_proof` varchar(255) DEFAULT NULL,
+  `last_updated_by` varchar(100) DEFAULT NULL,
+  `company_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`invoice_id`, `client_id`, `currency_id`, `exchange_rate`, `invoice_number`, `invoice_date`, `due_date`, `subtotal`, `tax_total`, `discount`, `grand_total`, `paid_amount`, `payment_method`, `payment_reference`, `terms_conditions`, `status`, `created_at`, `updated_at`, `outstanding_amount`, `remarks`, `payment_proof`, `last_updated_by`, `company_id`) VALUES
+('02DCE114', '6803BEA9', '3VRG0EFF', 83.250000, 'INV-00014', '2026-01-31', '2026-02-06', 19.22, 5.00, 0.00, 24.22, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-31 15:36:28', NULL, 24.22, '', NULL, NULL, 30043519),
+('06395256', '5524AADE', '3VRG0EFF', 83.250000, 'INV-00013', '2026-01-31', '2026-02-07', 19.22, 5.00, 0.00, 24.22, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-31 15:35:02', NULL, 24.22, 'na', NULL, NULL, 30043519),
+('110AC6ED', '6803BEA9', '3VRG0EFF', 83.250000, 'INV-00004', '2026-01-20', '2026-01-22', 1999.00, 519.74, 0.00, 2518.74, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-20 16:26:13', NULL, 2518.74, 'admin notes', NULL, NULL, 30043519),
+('1F8521CA', 'CLT_54A4', '3VRG0EFF', 83.250000, 'INV-00007', '2026-01-22', '2026-01-24', 19.22, 5.00, 0.00, 24.22, 24.22, 'UPI', NULL, 'Payment is due within 15 days.', 'paid', '2026-01-22 15:18:19', '2026-01-26 06:35:23', 0.00, 'jjjii5616515', NULL, NULL, 30043519),
+('33E62A23', '5524AADE', '3VRG0EFF', 83.250000, 'INV-00008', '2026-01-22', '2026-01-24', 19.22, 5.00, 0.00, 24.22, 24.22, NULL, NULL, 'Payment is due within 15 days.', 'paid', '2026-01-22 15:28:39', '2026-01-26 06:47:56', 0.00, 'no', NULL, NULL, 30043519),
+('490C520F', '6803BEA9', '3VRG0EFF', 83.250000, 'INV-00006', '2026-01-20', '2026-01-22', 19.22, 5.00, 0.00, 24.22, 24.22, 'Cash', NULL, 'Payment is due within 15 days.', 'paid', '2026-01-20 17:37:42', '2026-01-26 06:34:54', 0.00, '', NULL, NULL, 30043519),
+('5GJORN8E', '05E81AEE', '3VRG0EFF', 83.250000, 'INV-203757E0', '2026-01-16', '2026-01-21', 19.22, 5.00, 0.00, 24.22, 0.00, '', '', '• Payment is due within 15 days from the invoice date.\r\n• Late payments may attract additional charges.\r\n• Goods once sold will not be taken back or exchanged.\r\n• Any discrepancy must be reported within 7 days.\r\n• This invoice is system generated and does not require a signature.\r\n                ', '', '2026-01-16 14:27:34', '2026-01-16 14:27:34', 24.22, NULL, NULL, NULL, 30043519),
+('71CC5803', '5524AADE', '3VRG0EFF', 83.250000, 'INV-00010', '2026-01-31', '2026-02-06', 19.22, 5.00, 0.00, 24.22, 24.22, NULL, NULL, 'Payment is due within 15 days.', 'paid', '2026-01-31 15:09:04', '2026-02-01 03:30:05', 0.00, 'nothing', NULL, NULL, 30043519),
+('7AB84127', '5524AADE', '3VRG0EFF', 83.250000, 'INV-00015', '2026-01-31', '2026-02-06', 19.22, 5.00, 0.00, 24.22, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-31 15:40:19', NULL, 24.22, 'dfsdfs', NULL, NULL, 30043519),
+('8137446B', '6803BEA9', '3VRG0EFF', 83.250000, 'INV-00016', '2026-01-31', '2026-02-06', 19.22, 5.00, 0.00, 24.22, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-31 15:46:41', NULL, 24.22, 'nnn', NULL, NULL, 30043519),
+('A64DEBA5', '6803BEA9', '3VRG0EFF', 83.250000, 'INV-00012', '2026-01-31', '2026-02-07', 19.22, 5.00, 0.00, 24.22, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-31 15:34:00', NULL, 24.22, 'cxz', NULL, NULL, 30043519),
+('BAB782BF', '6803BEA9', '3VRG0EFF', 83.250000, 'INV-00011', '2026-01-31', '2026-01-30', 19.22, 5.00, 0.00, 24.22, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-31 15:22:08', NULL, 24.22, 'notificaiton', NULL, NULL, 30043519),
+('BC8B9DD0', '69AEEBCA', 'ACBFEF73', 0.560000, 'INV-00005', '2026-01-20', '2026-01-24', 2857.14, 742.86, 0.00, 3600.00, 0.00, NULL, NULL, 'Payment is due within 15 days.', 'unpaid', '2026-01-20 17:01:15', NULL, 3600.00, 'na', NULL, NULL, 30043519),
+('F6E99D4B', '5524AADE', '3VRG0EFF', 83.250000, 'INV-00009', '2026-01-26', '2026-01-29', 1999.00, 519.74, 0.00, 2518.74, 2518.74, NULL, NULL, 'Payment is due within 15 days.', 'paid', '2026-01-26 10:16:03', '2026-01-26 10:17:50', 0.00, 'dfsdfkjslkd', NULL, NULL, 30043519),
+('FDH835IT', '33JFZI92', '9GAMDPDF', 90.100000, 'INV-A528E034', '2026-01-03', '2026-01-16', 17.76, 4.62, 0.00, 22.38, 22.38, 'Cash', '', '• Payment is due within 15 days from the invoice date.\r\n• Late payments may attract additional charges.\r\n• Goods once sold will not be taken back or exchanged.\r\n• Any discrepancy must be reported within 7 days.\r\n• This invoice is system generated and does not require a signature.\r\n                ', 'paid', '2026-01-03 07:41:23', '2026-01-03 07:41:23', 0.00, NULL, NULL, NULL, 30043519),
+('OCSF1Z0I', '05E81AEE', '3VRG0EFF', 83.250000, 'INV-B6B14E59', '2026-01-03', '2026-01-15', 19.22, 5.00, 0.00, 24.22, 24.22, 'Cash', '', '• Payment is due within 15 days from the invoice date.\r\n• Late payments may attract additional charges.\r\n• Goods once sold will not be taken back or exchanged.\r\n• Any discrepancy must be reported within 7 days.\r\n• This invoice is system generated and does not require a signature.\r\n                ', 'paid', '2026-01-03 07:39:04', '2026-01-03 03:13:03', 0.00, 'cash recieved', NULL, '1', 30043519);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_items`
+--
+
+CREATE TABLE `invoice_items` (
+  `item_id` char(8) NOT NULL,
+  `invoice_id` char(8) NOT NULL,
+  `product_id` char(8) DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
+  `price` decimal(12,2) NOT NULL,
+  `base_price` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `tax_id` char(8) DEFAULT NULL,
+  `tax_rate` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `tax_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `total` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `tax_name` varchar(50) DEFAULT NULL,
+  `currency_code` varchar(10) DEFAULT NULL,
+  `exchange_rate` decimal(18,6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `invoice_items`
+--
+
+INSERT INTO `invoice_items` (`item_id`, `invoice_id`, `product_id`, `description`, `price`, `base_price`, `quantity`, `tax_id`, `tax_rate`, `tax_amount`, `total`, `created_at`, `updated_at`, `tax_name`, `currency_code`, `exchange_rate`) VALUES
+('014AA796', '06395256', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-31 15:35:02', NULL, NULL, NULL, NULL),
+('4878369A', '7AB84127', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-31 15:40:19', NULL, NULL, NULL, NULL),
+('4C3724A6', '110AC6ED', 'FEBF1146', '14-inch Laptop, 16GB RAM, 512GB SSD', 1999.00, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 1999.00, '2026-01-20 16:26:13', NULL, NULL, 'INR', 1.000000),
+('56480907', 'A64DEBA5', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-31 15:34:00', NULL, NULL, NULL, NULL),
+('78A4F53D', '02DCE114', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-31 15:36:28', NULL, NULL, NULL, NULL),
+('92034BBE', 'BC8B9DD0', '86WVOPH0', 'Best Antivirus Software For PC', 2857.14, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 2857.14, '2026-01-20 17:01:15', NULL, NULL, NULL, NULL),
+('92A9DA18', '71CC5803', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-31 15:09:04', NULL, NULL, NULL, NULL),
+('AA3BF647', '8137446B', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-31 15:46:41', NULL, NULL, NULL, NULL),
+('C1FEC5A6', '490C520F', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-20 17:37:42', NULL, NULL, NULL, NULL),
+('CCB92225', 'F6E99D4B', 'FEBF1146', '14-inch Laptop, 16GB RAM, 512GB SSD', 1999.00, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 1999.00, '2026-01-26 10:16:03', NULL, NULL, NULL, NULL),
+('CD5L7S2F', 'OCSF1Z0I', '86WVOPH0', 'Antivirus Software License (1 Year)', 19.22, 1600.00, 1, NULL, 26.00, 5.00, 24.22, '2026-01-03 07:39:04', NULL, 'VAT', 'USD', 83.250000),
+('D7E42B3D', '1F8521CA', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-22 15:18:19', NULL, NULL, NULL, NULL),
+('DA291779', 'BAB782BF', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-31 15:22:08', NULL, NULL, NULL, NULL),
+('FE536AA6', '33E62A23', '86WVOPH0', 'Best Antivirus Software For PC', 19.22, 0.00, 1, 'HKKUAVYX', 0.00, 0.00, 19.22, '2026-01-22 15:28:39', NULL, NULL, NULL, NULL),
+('KDX92YEU', 'FDH835IT', '86WVOPH0', 'Antivirus Software License (1 Year)', 17.76, 1600.00, 1, NULL, 26.00, 4.62, 22.38, '2026-01-03 07:41:23', NULL, 'VAT', 'EUR', 90.100000),
+('N6137DXJ', '5GJORN8E', '86WVOPH0', 'Antivirus Software License (1 Year)', 19.22, 1600.00, 1, NULL, 26.00, 5.00, 24.22, '2026-01-16 14:27:34', NULL, 'VAT', 'USD', 83.250000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `notification_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'Recipient User ID (Staff/Admin/Client)',
+  `company_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `sender_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `sender_type` enum('admin','staff','system') DEFAULT 'system',
+  `invoice_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `type` enum('info','success','warning','danger') DEFAULT 'info' COMMENT 'Bootstrap Color Style',
+  `link` varchar(255) DEFAULT NULL COMMENT 'Redirect URL',
+  `notification_type` enum('invoice','payment','alert','reminder','system') NOT NULL DEFAULT 'alert',
+  `priority` enum('low','medium','high') DEFAULT 'medium',
+  `status` enum('unread','read','archived') DEFAULT 'unread',
+  `is_read` tinyint(1) DEFAULT 0 COMMENT '0=Unread, 1=Read',
+  `read_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`notification_id`, `user_id`, `company_id`, `client_id`, `sender_id`, `sender_type`, `invoice_id`, `title`, `message`, `type`, `link`, `notification_type`, `priority`, `status`, `is_read`, `read_at`, `created_at`, `updated_at`) VALUES
+(3, NULL, 30043519, 0, 1, 'staff', 1, 'New Invoice #INV-00007', 'A new invoice has been generated for amount 24.22', 'info', NULL, 'invoice', 'medium', 'unread', 0, NULL, '2026-01-22 20:48:19', '2026-01-22 20:48:19'),
+(4, 9, 30043519, 0, 9, '', 18446744073709551615, 'New Invoice #INV-00008', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 20:58:39', '2026-01-22 21:46:59'),
+(5, 9, 30043519, 0, 9, '', 18446744073709551615, 'Invoice Created', 'Invoice #INV-00008 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=33E62A23D800F56F', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 20:58:39', '2026-01-22 21:46:59'),
+(6, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'Admin replied to ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 21:26:27', '2026-01-22 21:46:59'),
+(7, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'Admin replied to ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 21:26:32', '2026-01-22 21:46:59'),
+(8, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'Admin replied to ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 21:26:33', '2026-01-22 21:46:59'),
+(9, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'Admin replied to ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 21:26:34', '2026-01-22 21:46:59'),
+(10, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'Admin replied to ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 21:26:45', '2026-01-22 21:46:59'),
+(11, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'Admin replied to ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 1, NULL, '2026-01-22 21:27:28', '2026-01-22 21:46:59'),
+(12, 1, 0, 0, NULL, 'system', NULL, 'New Reply on Ticket', 'Client replied to ticket #2', 'info', 'http://localhost/IMS/views/support/reply.php?id=2', 'alert', 'medium', 'unread', 0, NULL, '2026-01-22 21:46:21', '2026-01-22 21:46:21'),
+(13, 12, 0, 0, NULL, 'system', NULL, 'New Task Assigned', 'You have been assigned a new task: dkdfsjdfkjsdkf', 'info', 'http://localhost/IMS/views/tasks/manage.php?task_id=2', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 11:52:53', '2026-01-26 11:52:53'),
+(14, 7, 30043519, 0, 12, 'staff', 490, 'Payment Received', 'We received a payment of 24.22 for Invoice #INV-00006.', 'success', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 12:04:54', '2026-01-26 12:04:54'),
+(15, 14, 30043519, 0, 12, 'staff', 1, 'Payment Received', 'We received a payment of 24.22 for Invoice #INV-00007.', 'success', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 12:05:23', '2026-01-26 12:05:23'),
+(16, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'New reply on ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 12:28:58', '2026-01-26 12:28:58'),
+(17, 9, 0, 0, NULL, 'system', NULL, 'Ticket Resolved', 'Ticket #2 has been marked as resolved.', 'success', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 12:37:08', '2026-01-26 12:37:08'),
+(18, 9, 0, 0, NULL, 'system', NULL, 'Ticket Resolved', 'Ticket #2 has been marked as resolved.', 'success', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 12:38:16', '2026-01-26 12:38:16'),
+(19, 9, 0, 0, NULL, 'system', NULL, 'Support Ticket Update', 'New reply on ticket #2', 'info', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 12:38:24', '2026-01-26 12:38:24'),
+(20, 9, 0, 0, NULL, 'system', NULL, 'Ticket Resolved', 'Ticket #2 has been marked as resolved.', 'success', 'http://localhost/IMS/views/portal/support.php?id=2', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 12:38:40', '2026-01-26 12:38:40'),
+(21, 9, 30043519, 0, 1, 'admin', 0, 'New Invoice #INV-00009', 'A new invoice has been generated. Total: 2,518.74', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 15:46:03', '2026-01-26 15:46:03'),
+(22, 1, 30043519, 0, 1, 'admin', 0, 'Invoice Created', 'Invoice #INV-00009 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=F6E99D4B5FF725A9', 'alert', 'medium', 'unread', 0, NULL, '2026-01-26 15:46:03', '2026-01-26 15:46:03'),
+(23, 1, 0, 0, NULL, 'system', NULL, 'New Support Ticket', 'Client created ticket #3', 'warning', 'http://localhost/IMS/views/support/reply.php?id=3', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 19:24:02', '2026-01-28 19:24:02'),
+(24, 1, 0, 0, NULL, 'system', NULL, 'New Support Ticket', 'Client created ticket #4', 'warning', 'http://localhost/IMS/views/support/reply.php?id=4', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 19:35:09', '2026-01-28 19:35:09'),
+(25, 1, 0, 0, NULL, 'system', NULL, 'New Reply on Ticket', 'Client replied to ticket #4', 'info', 'http://localhost/IMS/views/support/reply.php?id=4', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 19:53:41', '2026-01-28 19:53:41'),
+(26, 1, 0, 0, NULL, 'system', NULL, 'New Support Ticket', 'Client created ticket #5', 'warning', 'http://localhost/IMS/views/support/reply.php?id=5', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 20:05:01', '2026-01-28 20:05:01'),
+(27, 1, 0, 0, NULL, 'system', NULL, 'New Support Ticket', 'Client created ticket #6', 'warning', 'http://localhost/IMS/views/support/reply.php?id=6', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 20:08:04', '2026-01-28 20:08:04'),
+(28, 1, 0, 0, NULL, 'system', NULL, 'New Support Ticket', 'Client created ticket #7', 'warning', 'http://localhost/IMS/views/support/reply.php?id=7', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 20:09:05', '2026-01-28 20:09:05'),
+(29, 1, 0, 0, NULL, 'system', NULL, 'New Reply on Ticket', 'Client replied to ticket #7', 'info', 'http://localhost/IMS/views/support/reply.php?id=7', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 20:09:22', '2026-01-28 20:09:22'),
+(30, 1, 0, 0, NULL, 'system', NULL, 'New Support Ticket', 'Client created ticket #8', 'warning', 'http://localhost/IMS/views/support/reply.php?id=8', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 20:12:20', '2026-01-28 20:12:20'),
+(31, 1, 0, 0, NULL, 'system', NULL, 'New Reply on Ticket', 'Client replied to ticket #8', 'info', 'http://localhost/IMS/views/support/reply.php?id=8', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 20:13:55', '2026-01-28 20:13:55'),
+(32, 1, 0, 0, NULL, 'system', NULL, 'New Reply on Ticket', 'Client replied to ticket #5', 'info', 'http://localhost/IMS/views/support/reply.php?id=5', 'alert', 'medium', 'unread', 0, NULL, '2026-01-28 20:18:31', '2026-01-28 20:18:31'),
+(33, 9, 30043519, 0, 1, 'admin', 71, 'New Invoice #INV-00010', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 20:39:04', '2026-01-31 20:39:04'),
+(34, 1, 30043519, 0, 1, 'admin', 71, 'Invoice Created', 'Invoice #INV-00010 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=71CC58037DC52257', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 20:39:04', '2026-01-31 20:39:04'),
+(35, 7, 30043519, 0, 1, 'admin', 0, 'New Invoice #INV-00011', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 20:52:08', '2026-01-31 20:52:08'),
+(36, 1, 30043519, 0, 1, 'admin', 0, 'Invoice Created', 'Invoice #INV-00011 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=BAB782BF8201A8D1', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 20:52:08', '2026-01-31 20:52:08'),
+(37, 7, 30043519, 0, 1, 'admin', 0, 'New Invoice #INV-00012', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:04:00', '2026-01-31 21:04:00'),
+(38, 1, 30043519, 0, 1, 'admin', 0, 'Invoice Created', 'Invoice #INV-00012 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=A64DEBA5D1F5257A', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:04:00', '2026-01-31 21:04:00'),
+(39, 9, 30043519, 0, 1, 'admin', 63952566744, 'New Invoice #INV-00013', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:05:02', '2026-01-31 21:05:02'),
+(40, 1, 30043519, 0, 1, 'admin', 63952566744, 'Invoice Created', 'Invoice #INV-00013 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=063952566744A11F', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:05:02', '2026-01-31 21:05:02'),
+(41, 7, 30043519, 0, 1, 'admin', 2, 'New Invoice #INV-00014', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:06:28', '2026-01-31 21:06:28'),
+(42, 1, 30043519, 0, 1, 'admin', 2, 'Invoice Created', 'Invoice #INV-00014 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=02DCE1140B9EA2EF', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:06:28', '2026-01-31 21:06:28'),
+(43, 9, 30043519, 0, 1, 'admin', 7, 'New Invoice #INV-00015', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:10:19', '2026-01-31 21:10:19'),
+(44, 1, 30043519, 0, 1, 'admin', 7, 'Invoice Created', 'Invoice #INV-00015 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=7AB84127CC0E5E65', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:10:19', '2026-01-31 21:10:19'),
+(45, 7, 30043519, 0, 1, 'admin', 8137446, 'New Invoice #INV-00016', 'A new invoice has been generated. Total: 24.22', 'info', 'http://localhost/IMS/views/portal/my-invoices.php', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:16:41', '2026-01-31 21:16:41'),
+(46, 1, 30043519, 0, 1, 'admin', 8137446, 'Invoice Created', 'Invoice #INV-00016 created successfully.', 'success', 'http://localhost/IMS/views/invoices/view.php?id=8137446BEDFED12D', 'alert', 'medium', 'unread', 0, NULL, '2026-01-31 21:16:41', '2026-01-31 21:16:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `payment_id` int(11) NOT NULL,
+  `payment_type` enum('invoice','subscription') DEFAULT 'invoice',
+  `company_id` bigint(20) NOT NULL,
+  `plan_id` int(11) DEFAULT NULL,
+  `invoice_id` char(8) DEFAULT NULL,
+  `client_id` char(8) DEFAULT NULL,
+  `transaction_id` varchar(50) DEFAULT NULL,
+  `payment_method` varchar(20) DEFAULT 'Card',
+  `amount` decimal(10,2) NOT NULL,
+  `payment_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('success','failed','pending') DEFAULT 'success'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`payment_id`, `payment_type`, `company_id`, `plan_id`, `invoice_id`, `client_id`, `transaction_id`, `payment_method`, `amount`, `payment_date`, `status`) VALUES
+(1, 'invoice', 30043519, NULL, '33E62A23', '5524AADE', 'TXN-E4962C3849FA', 'Credit Card', 24.22, '2026-01-26 06:47:56', 'success'),
+(2, 'invoice', 30043519, NULL, 'F6E99D4B', '5524AADE', 'TXN-3042D36BA2BE', 'Credit Card', 2518.74, '2026-01-26 10:17:50', 'success'),
+(4, 'subscription', 30043519, 2, NULL, NULL, 'txn_D0XO98BHV', 'Card', 99.00, '2026-01-31 12:03:38', 'success'),
+(5, 'invoice', 30043519, NULL, '71CC5803', '5524AADE', 'TXN-21A724307615', 'Credit Card', 24.22, '2026-02-01 03:30:05', 'success');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_notes`
+--
+
+CREATE TABLE `personal_notes` (
+  `note_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text DEFAULT NULL,
+  `color` varchar(20) DEFAULT 'bg-white',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `personal_notes`
+--
+
+INSERT INTO `personal_notes` (`note_id`, `user_id`, `title`, `content`, `color`, `created_at`, `updated_at`) VALUES
+(1, 12, 'Meeting Tomarrow', 'techfest have meeting  now', 'bg-yellow', '2026-01-26 06:20:10', '2026-01-26 06:20:33'),
+(2, 1, 'metting today', 'ms tech.', 'bg-blue', '2026-01-26 10:13:22', '2026-01-26 10:13:22'),
+(3, 9, 'bjkhkj', 'nljlklk', 'bg-yellow', '2026-01-28 16:26:01', '2026-01-28 16:26:01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plans`
+--
+
+CREATE TABLE `plans` (
+  `plan_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `duration` int(11) DEFAULT 30,
+  `features` text DEFAULT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `plans`
+--
+
+INSERT INTO `plans` (`plan_id`, `name`, `price`, `duration`, `features`, `status`, `deleted_at`) VALUES
+(1, 'Basic', 29.00, 30, '5 Users, Basic Support', 'active', NULL),
+(2, 'Pro', 99.00, 30, 'Unlimited Users, Priority Support', 'active', NULL),
+(3, 'Enterprise', 299.00, 365, 'Dedicated Server, 24/7 Support', 'active', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `product_id` char(8) NOT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `sku` varchar(50) DEFAULT NULL,
+  `category` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(12,2) NOT NULL,
+  `currency_id` char(8) NOT NULL,
+  `tax_id` char(8) DEFAULT NULL,
+  `stock_quantity` int(11) DEFAULT 0,
+  `unit` varchar(20) DEFAULT 'pcs',
+  `product_type` enum('product','service') DEFAULT 'product',
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `code` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`product_id`, `company_id`, `name`, `sku`, `category`, `description`, `price`, `currency_id`, `tax_id`, `stock_quantity`, `unit`, `product_type`, `status`, `created_at`, `updated_at`, `code`) VALUES
+('86WVOPH0', 30043519, 'Antivirus Software License (1 Year)', 'SW-AV-1YR', '', 'Best Antivirus Software For PC', 1600.00, 'CUR693FA', NULL, 160, 'pcs', 'product', 'active', '2025-12-15 06:59:41', '2026-01-26 06:31:31', NULL),
+('FEBF1146', 30043519, 'MacBook Pro M3', 'MBP-M3-14', '', '14-inch Laptop, 16GB RAM, 512GB SSD', 1999.00, '3VRG0EFF', 'HKKUAVYX', 50, 'pcs', 'product', 'active', '2026-01-20 14:07:19', '2026-01-20 14:07:30', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `staff_id` bigint(20) NOT NULL,
+  `staff_code` char(8) DEFAULT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT 'User/Admin who created this staff',
+  `name` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `role` enum('staff') NOT NULL DEFAULT 'staff',
+  `avatar` varchar(255) DEFAULT NULL,
+  `position` varchar(100) NOT NULL COMMENT 'Accountant, Clerk, Manager, etc',
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`staff_id`, `staff_code`, `company_id`, `user_id`, `name`, `email`, `phone`, `role`, `avatar`, `position`, `status`, `created_at`, `updated_at`) VALUES
+(7, '94749934', 12270123, 1, 'gaurav', 'gaurav@gmail.com', '8859632692', 'staff', NULL, 'Clerk', 'active', '2026-01-16 14:43:35', '2026-01-16 14:43:35'),
+(8, '67930439', 12270123, 1, 'MandiDm', 'upstack@info.in', '8859696320', 'staff', NULL, 'staff', 'active', '2026-01-19 14:29:21', '2026-01-19 14:29:21'),
+(9, 'STF-96A3', 12270123, 1, 'MandiDm', 'tech@gmail.com', '8859696325', 'staff', NULL, 'staff', 'active', '2026-01-19 14:40:39', '2026-01-19 14:40:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE `subscriptions` (
+  `sub_id` int(11) NOT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `plan_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `status` enum('active','expired','cancelled','pending_approval') DEFAULT 'pending_approval',
+  `payment_status` enum('paid','pending') DEFAULT 'pending',
+  `last_payment_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subscriptions`
+--
+
+INSERT INTO `subscriptions` (`sub_id`, `company_id`, `plan_id`, `start_date`, `end_date`, `status`, `payment_status`, `last_payment_id`, `created_at`) VALUES
+(1, 30043519, 2, '2026-01-31', '2026-03-02', 'active', 'paid', 4, '2026-01-31 12:03:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `support_messages`
+--
+
+CREATE TABLE `support_messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ticket_id` bigint(20) UNSIGNED NOT NULL,
+  `sender_id` bigint(20) NOT NULL,
+  `sender_type` enum('client','admin','staff') NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `support_messages`
+--
+
+INSERT INTO `support_messages` (`id`, `ticket_id`, `sender_id`, `sender_type`, `message`, `created_at`) VALUES
+(1, 1, 1, 'admin', 'thanks for confirm', '2026-01-22 13:56:12'),
+(2, 1, 1, 'admin', 'thanks for confirm', '2026-01-22 13:57:21'),
+(3, 2, 1, 'admin', 'hi', '2026-01-22 15:56:27'),
+(4, 2, 1, 'admin', 'hi', '2026-01-22 15:56:32'),
+(5, 2, 1, 'admin', 'hi', '2026-01-22 15:56:33'),
+(6, 2, 1, 'admin', 'hi', '2026-01-22 15:56:34'),
+(7, 2, 1, 'admin', 'hi', '2026-01-22 15:56:45'),
+(8, 2, 1, 'admin', 'jpo', '2026-01-22 15:57:28'),
+(9, 2, 9, 'client', 'hlo', '2026-01-22 16:16:21'),
+(10, 2, 12, 'staff', 'hi am am avalable now', '2026-01-26 06:58:58'),
+(11, 2, 1, 'admin', '[System: Ticket marked as Resolved by Admin]', '2026-01-26 07:07:08'),
+(12, 2, 1, 'admin', 'resolved', '2026-01-26 07:08:16'),
+(13, 2, 1, 'admin', '[System: Ticket Re-opened]', '2026-01-26 07:08:24'),
+(14, 2, 1, 'admin', '[System: Ticket marked as Resolved by Admin]', '2026-01-26 07:08:40'),
+(15, 4, 9, 'client', 'is my requet done or not', '2026-01-28 14:23:41'),
+(16, 7, 9, 'client', 'ddd', '2026-01-28 14:39:22'),
+(17, 8, 9, 'client', 'dfgfdgdfg', '2026-01-28 14:43:55'),
+(18, 5, 9, 'client', 'dfsdfsdf', '2026-01-28 14:48:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `support_tickets`
+--
+
+CREATE TABLE `support_tickets` (
+  `ticket_id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` varchar(50) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `solution` text DEFAULT 'Final resolution summary',
+  `status` enum('open','closed','pending') DEFAULT 'open',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `support_tickets`
+--
+
+INSERT INTO `support_tickets` (`ticket_id`, `company_id`, `client_id`, `subject`, `message`, `solution`, `status`, `created_at`, `updated_at`) VALUES
+(1, 30043519, '5524AADE', 'Payment Issue', 'i am facing the bank transion faild due to bank server error', NULL, 'closed', '2026-01-21 04:42:24', '2026-01-22 13:57:21'),
+(2, 30043519, '5524AADE', 'Account Settings', 'njhhbhb', 'Marked as resolved by administrator.', 'closed', '2026-01-22 15:05:51', '2026-01-26 07:08:40'),
+(3, 30043519, '5524AADE', 'Technical Support', 'technical issue', 'RESOLVED', 'closed', '2026-01-28 13:54:02', '2026-01-28 15:45:02'),
+(4, 30043519, '5524AADE', 'Feature Request', 'sfsdfsdf sdf', 'CLOSE', 'closed', '2026-01-28 14:05:09', '2026-01-28 15:44:45'),
+(5, 30043519, '5524AADE', 'Technical Issue', 'afv', 'closed the ticket', 'closed', '2026-01-28 14:35:01', '2026-01-28 15:09:09'),
+(6, 30043519, '5524AADE', 'Technical Support', 'xxdv', 'closed the ticket', 'closed', '2026-01-28 14:38:04', '2026-01-28 15:08:34'),
+(7, 30043519, '5524AADE', 'Billing Question', 'eedd', 'close the ticket', 'closed', '2026-01-28 14:39:05', '2026-01-28 15:07:11'),
+(8, 30043519, '5524AADE', 'Other', 'fi', 'Your admin  resolved this ticket.', 'closed', '2026-01-28 14:42:20', '2026-01-28 14:59:03'),
+(9, 30043519, '5524AADE', 'no wrking', 'hbjhklklk', 'RESOLVED', 'closed', '2026-01-28 15:38:43', '2026-01-28 15:43:41'),
+(10, 30043519, '0', 'System Bug', 'FOUND SYS BUG', 'RESOLVED', 'closed', '2026-01-28 15:44:20', '2026-01-28 15:46:00'),
+(11, 30043519, '5524AADE', 'Technical Support', 'dfsdfsf', 'Final resolution summary', 'open', '2026-02-01 03:46:57', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_settings`
+--
+
+CREATE TABLE `system_settings` (
+  `setting_key` varchar(50) NOT NULL,
+  `setting_value` text DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `system_settings`
+--
+
+INSERT INTO `system_settings` (`setting_key`, `setting_value`, `updated_at`) VALUES
+('allow_registration', '1', '2026-02-01 04:47:58'),
+('app_currency', 'USD', '2026-01-26 08:16:42'),
+('app_currency_symbol', '$', '2026-01-26 08:16:42'),
+('app_name', 'SaaS Command', '2026-01-26 08:16:42'),
+('app_timezone', 'UTC', '2026-01-26 08:16:42'),
+('footer_text', '© 2026 Invoice Management System (IMS). All Rights Reserved. Created with  by Gaurav', '2026-02-01 04:47:58'),
+('maintenance_mode', '0', '2026-01-26 08:16:42'),
+('smtp_host', 'smtp.mailtrap.io', '2026-01-26 08:16:42'),
+('smtp_pass', '', '2026-01-26 08:16:42'),
+('smtp_port', '587', '2026-01-26 08:16:42'),
+('smtp_user', '', '2026-01-26 08:16:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `task_id` bigint(20) UNSIGNED NOT NULL,
+  `company_id` bigint(20) UNSIGNED NOT NULL,
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `assigned_to` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `priority` enum('low','medium','high','urgent') DEFAULT 'medium',
+  `status` enum('pending','in_progress','review','completed','cancelled') DEFAULT 'pending',
+  `due_date` date DEFAULT NULL,
+  `solution` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`task_id`, `company_id`, `created_by`, `assigned_to`, `title`, `description`, `priority`, `status`, `due_date`, `solution`, `created_at`, `updated_at`) VALUES
+(1, 30043519, 1, 1, 'ttttt', 'hkhkjhjkhjhkjhkhkhk', 'medium', 'pending', '2026-01-30', '', '2026-01-22 14:21:09', '2026-01-22 14:33:40'),
+(2, 30043519, 1, 12, 'dkdfsjdfkjsdkf', 'df;klsjdfkjlvkksnvns;v', 'urgent', 'pending', '2026-01-29', NULL, '2026-01-26 06:22:53', '2026-01-26 06:22:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_comments`
+--
+
+CREATE TABLE `task_comments` (
+  `comment_id` bigint(20) UNSIGNED NOT NULL,
+  `task_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `task_comments`
+--
+
+INSERT INTO `task_comments` (`comment_id`, `task_id`, `user_id`, `message`, `created_at`) VALUES
+(1, 2, 1, 'xcvcv', '2026-01-26 10:12:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `taxes`
+--
+
+CREATE TABLE `taxes` (
+  `tax_id` char(8) NOT NULL,
+  `company_id` bigint(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `rate` decimal(10,2) NOT NULL,
+  `description` text DEFAULT NULL,
+  `currency_id` char(8) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `taxes`
+--
+
+INSERT INTO `taxes` (`tax_id`, `company_id`, `name`, `country`, `rate`, `description`, `currency_id`, `created_at`) VALUES
+('HKKUAVYX', 30043519, 'VAT', 'USA', 26.00, 'new tax added', '3VRG0EFF', '2025-12-15 06:35:04'),
+('TAX_242D', 30043519, 'CGST', 'India', 16.00, 'CGST for india', 'CUR693FA', '2026-01-20 14:47:21'),
+('YGBLCS4N', 30043519, 'GST', 'India', 18.00, 'Goods and service tax', 'CUR693FA', '2025-12-15 06:07:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonials`
+--
+
+CREATE TABLE `testimonials` (
+  `id` int(11) NOT NULL,
+  `client_name` varchar(100) NOT NULL,
+  `client_role` varchar(100) DEFAULT 'Business Owner',
+  `company` varchar(100) DEFAULT NULL,
+  `content` text NOT NULL,
+  `rating` int(1) NOT NULL DEFAULT 5,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`id`, `client_name`, `client_role`, `company`, `content`, `rating`, `is_active`, `created_at`) VALUES
+(1, 'Sarah Jenkins', 'CEO', 'TechFlow', 'IMS transformed how we handle billing. We get paid 2x faster now.', 5, 1, '2026-02-01 05:39:39'),
+(2, 'David Miller', 'Freelancer', 'Design Studio', 'The client portal is a game changer. My clients love the transparency.', 5, 1, '2026-02-01 05:39:39'),
+(3, 'Emily Chen', 'Finance Director', 'Global Corp', 'Security and audit logs were our priority. IMS delivered perfectly.', 5, 1, '2026-02-01 05:39:39'),
+(4, 'Gaurav', 'CEO', 'Gaurav Tech Pvt. Ltd.', 'Content feedback relates to the meaning and content of the learners&#039; communication. It provides guidance on the information&#039;s accuracy, ideas, and concepts, ensuring effective communication and comprehension.', 5, 1, '2026-02-01 06:15:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_replies`
+--
+
+CREATE TABLE `ticket_replies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ticket_id` bigint(20) UNSIGNED NOT NULL,
+  `sender_id` varchar(50) NOT NULL,
+  `sender_type` enum('client','admin','staff','superadmin') NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket_replies`
+--
+
+INSERT INTO `ticket_replies` (`id`, `ticket_id`, `sender_id`, `sender_type`, `message`, `created_at`) VALUES
+(1, 4, '16', 'superadmin', 'hi', '2026-01-28 14:05:31'),
+(2, 4, '16', 'superadmin', 'wo', '2026-01-28 14:12:48'),
+(3, 4, '1', 'admin', 'hihi', '2026-01-28 14:13:26'),
+(4, 4, '16', 'superadmin', 'see me', '2026-01-28 14:21:11'),
+(5, 4, '1', 'admin', 'okay done', '2026-01-28 14:22:01'),
+(6, 4, '1', 'admin', 'your complaint is resolved', '2026-01-28 14:22:30'),
+(7, 8, '1', 'admin', 'ok', '2026-01-28 14:51:25'),
+(8, 7, '1', 'admin', 'okay', '2026-01-28 14:51:49'),
+(9, 6, '1', 'admin', 'resolved', '2026-01-28 14:52:11'),
+(10, 6, '1', 'admin', 'your ticket is resolved check it', '2026-01-28 14:53:42'),
+(11, 6, '16', 'superadmin', 'resolved', '2026-01-28 14:54:42'),
+(12, 8, '16', 'superadmin', 'Your admin  resolved this ticket.', '2026-01-28 14:59:03'),
+(13, 7, '16', 'superadmin', 'close the ticket', '2026-01-28 15:07:11'),
+(14, 6, '1', 'admin', 'closed the ticket', '2026-01-28 15:08:34'),
+(15, 5, '1', 'admin', 'closed the ticket', '2026-01-28 15:09:09'),
+(16, 9, '1', 'admin', 'RESOLVED', '2026-01-28 15:43:41'),
+(17, 4, '1', 'admin', 'CLOSE', '2026-01-28 15:44:45'),
+(18, 3, '1', 'admin', 'RESOLVED', '2026-01-28 15:45:02'),
+(19, 10, '16', 'superadmin', 'RESOLVED', '2026-01-28 15:46:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role` enum('superadmin','admin','staff','client','user') NOT NULL DEFAULT 'user',
+  `avatar` varchar(255) DEFAULT NULL,
+  `company_id` bigint(20) DEFAULT NULL,
+  `client_id` char(8) DEFAULT NULL,
+  `staff_id` int(11) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` enum('active','inactive','blocked','pending') NOT NULL DEFAULT 'active',
+  `reset_token` varchar(255) DEFAULT NULL,
+  `token_expiry` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `avatar`, `company_id`, `client_id`, `staff_id`, `phone`, `address`, `created_at`, `updated_at`, `status`, `reset_token`, `token_expiry`) VALUES
+(1, 'Gaurav', 'gauravsharma2025@gmail.com', '$2y$10$PBXOZ9ZlW764u.9J1Iv9ZeeXY4RQ.ErmrzqnlBH14LqxAT8Bh1zy6', 'admin', '1769166759_theme.jpeg', 30043519, NULL, NULL, '7018502322', 'Mandi', '2025-11-27 10:41:36', '2026-01-20 13:21:40', 'active', NULL, NULL),
+(7, 'Gaurav', 'upstack222@info.in', '$2y$10$8EyML.xdZlWvX9L5lmRGRuNCDeXJMbrw/ItIaG.BYFmbYMSsC4WY.', 'client', NULL, 30043519, '6803BEA9', NULL, NULL, NULL, '2026-01-17 13:23:23', '2026-01-20 17:49:55', 'active', NULL, NULL),
+(8, 'Gaurav', 'gauravnic76@gmail.com', '$2y$10$GgRNWeyY5bGhR6QQ8zLyUeA.cVxmHUMZ3SrOzLjrvrX2G9/r/C9K6', 'client', NULL, 30043519, '69AEEBCA', NULL, NULL, NULL, '2026-01-17 13:25:55', NULL, 'active', NULL, NULL),
+(9, 'MOBIS', 'MOBIS@GMAIL.COM', '$2y$10$wXUNxWkYMGwQmjE2ZSH5aOSaCrMD/iRPgZ/pqyxMN5cOuObMzstGe', 'client', NULL, 30043519, '5524AADE', NULL, NULL, NULL, '2026-01-17 13:46:19', '2026-01-26 10:26:22', 'active', '0708b7545bdef8589ab84060a570e1bfe0c3dfac39838ea46f400580ec4a6c53', '2026-01-26 16:56:22'),
+(10, 'MandiDm', 'tech@gmail.com', '$2y$10$gtlJoatO0ZrgGf8Zy69ZbeLNgzwHV0QqMtESuoMrH/xXKFGIPYuaO', 'staff', NULL, 12270123, NULL, 9, NULL, NULL, '2026-01-19 14:40:39', NULL, 'active', NULL, NULL),
+(11, 'MandiDm', 'gaurav@gmail.com', '$2y$10$Y7spRPHz2LxNmyLG7TvkR.AowPjvjsGwCd.9nC5OapJG9W6eTn2FS', 'admin', NULL, 60891710, NULL, NULL, NULL, NULL, '2026-01-19 16:37:55', '2026-01-19 17:33:03', 'active', NULL, NULL),
+(12, 'GGG', 'GGG@gmail.com', '$2y$10$/aPHQ/meO8J/2gr1OTQ.R.1V4HEzRn1R3E7CimzFn//b2gP2Hvcwi', 'staff', NULL, 30043519, NULL, NULL, '8859696564', NULL, '2026-01-19 17:52:10', '2026-01-20 14:16:15', 'active', NULL, NULL),
+(13, 'Mukesh', 'mukesh@gmail.com', '$2y$10$XOIFgHRKVjR46pcV/EKsI.UDtte24pwM9kuK9ZxGn0vTv0eoi5Y1G', 'staff', NULL, 30043519, NULL, NULL, '9685632690', NULL, '2026-01-20 14:17:00', '2026-01-20 14:17:00', 'active', NULL, NULL),
+(14, 'Morgen', 'mabus@gmail.com', '$2y$10$YC8EvD1XGtKoOiKt4n.piOGfhQXUkMVA/LYuuTwFmf2ihixERaJoO', 'client', NULL, 30043519, 'CLT_54A4', NULL, NULL, NULL, '2026-01-20 14:35:24', NULL, 'active', NULL, NULL),
+(15, 'pppp', 'pp@gmail.com', '$2y$10$Hx59BhupbRu3Oud.73qq/udb5zcASGj3MS.0cjXGoELBdkbnDQ/ea', 'client', NULL, 30043519, 'CLT_5FF1', NULL, NULL, NULL, '2026-01-21 04:30:29', NULL, 'active', NULL, NULL),
+(16, 'Gaurav', 'gauravsharma.dev2025@gmail.com', '$2y$10$iOSniKaruelPISM/q778seZGB3aZx0Al781wuErq8q3/O5YIOmhy6', 'superadmin', NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-26 07:14:02', '2026-01-26 07:14:02', 'active', NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `audit_logs`
+--
+ALTER TABLE `audit_logs`
+  ADD PRIMARY KEY (`log_id`);
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`client_id`),
+  ADD KEY `currency_id` (`currency_id`),
+  ADD KEY `fk_clients_company` (`company_id`);
+
+--
+-- Indexes for table `companies`
+--
+ALTER TABLE `companies`
+  ADD PRIMARY KEY (`company_id`),
+  ADD KEY `fk_company_user` (`created_by`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Indexes for table `currencies`
+--
+ALTER TABLE `currencies`
+  ADD PRIMARY KEY (`currency_id`),
+  ADD UNIQUE KEY `code` (`code`),
+  ADD KEY `fk_currency_company` (`company_id`);
+
+--
+-- Indexes for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD PRIMARY KEY (`expense_id`),
+  ADD KEY `fk_expense_company` (`company_id`),
+  ADD KEY `fk_expense_category` (`category_id`),
+  ADD KEY `fk_expense_currency` (`currency_id`);
+
+--
+-- Indexes for table `expense_categories`
+--
+ALTER TABLE `expense_categories`
+  ADD PRIMARY KEY (`category_id`),
+  ADD KEY `fk_category_company` (`company_id`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD UNIQUE KEY `invoice_number` (`invoice_number`),
+  ADD KEY `client_id` (`client_id`),
+  ADD KEY `currency_id` (`currency_id`),
+  ADD KEY `fk_invoices_company` (`company_id`);
+
+--
+-- Indexes for table `invoice_items`
+--
+ALTER TABLE `invoice_items`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `invoice_id` (`invoice_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notification_id`),
+  ADD KEY `idx_company` (`company_id`),
+  ADD KEY `idx_client` (`client_id`),
+  ADD KEY `idx_sender` (`sender_id`),
+  ADD KEY `idx_status` (`status`),
+  ADD KEY `idx_user_id` (`user_id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `invoice_id` (`invoice_id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
+-- Indexes for table `personal_notes`
+--
+ALTER TABLE `personal_notes`
+  ADD PRIMARY KEY (`note_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `plans`
+--
+ALTER TABLE `plans`
+  ADD PRIMARY KEY (`plan_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`),
+  ADD UNIQUE KEY `sku` (`sku`),
+  ADD KEY `currency_id` (`currency_id`),
+  ADD KEY `tax_id` (`tax_id`),
+  ADD KEY `fk_product_company` (`company_id`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`staff_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `staff_code` (`staff_code`),
+  ADD KEY `fk_staff_company` (`company_id`),
+  ADD KEY `fk_staff_user` (`user_id`);
+
+--
+-- Indexes for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  ADD PRIMARY KEY (`sub_id`);
+
+--
+-- Indexes for table `support_messages`
+--
+ALTER TABLE `support_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `support_tickets`
+--
+ALTER TABLE `support_tickets`
+  ADD PRIMARY KEY (`ticket_id`),
+  ADD KEY `idx_client` (`client_id`),
+  ADD KEY `idx_company` (`company_id`);
+
+--
+-- Indexes for table `system_settings`
+--
+ALTER TABLE `system_settings`
+  ADD PRIMARY KEY (`setting_key`);
+
+--
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`task_id`);
+
+--
+-- Indexes for table `task_comments`
+--
+ALTER TABLE `task_comments`
+  ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Indexes for table `taxes`
+--
+ALTER TABLE `taxes`
+  ADD PRIMARY KEY (`tax_id`),
+  ADD KEY `currency_id` (`currency_id`),
+  ADD KEY `fk_tax_company` (`company_id`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ticket_replies`
+--
+ALTER TABLE `ticket_replies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `unique_email` (`email`),
+  ADD UNIQUE KEY `unique_active_email` (`email`,`status`),
+  ADD KEY `idx_reset_token` (`reset_token`),
+  ADD KEY `idx_company` (`company_id`),
+  ADD KEY `idx_role` (`role`),
+  ADD KEY `idx_client` (`client_id`),
+  ADD KEY `idx_staff` (`staff_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `audit_logs`
+--
+ALTER TABLE `audit_logs`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `expense_categories`
+--
+ALTER TABLE `expense_categories`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notification_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `personal_notes`
+--
+ALTER TABLE `personal_notes`
+  MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `plans`
+--
+ALTER TABLE `plans`
+  MODIFY `plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `staff_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `support_messages`
+--
+ALTER TABLE `support_messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `support_tickets`
+--
+ALTER TABLE `support_tickets`
+  MODIFY `ticket_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `task_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `task_comments`
+--
+ALTER TABLE `task_comments`
+  MODIFY `comment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ticket_replies`
+--
+ALTER TABLE `ticket_replies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `clients`
+--
+ALTER TABLE `clients`
+  ADD CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`currency_id`),
+  ADD CONSTRAINT `fk_clients_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `companies`
+--
+ALTER TABLE `companies`
+  ADD CONSTRAINT `fk_company_user` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `currencies`
+--
+ALTER TABLE `currencies`
+  ADD CONSTRAINT `fk_currency_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD CONSTRAINT `fk_expense_category` FOREIGN KEY (`category_id`) REFERENCES `expense_categories` (`category_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_expense_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_expense_currency` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`currency_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `expense_categories`
+--
+ALTER TABLE `expense_categories`
+  ADD CONSTRAINT `fk_category_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`);
+
+--
+-- Constraints for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD CONSTRAINT `fk_invoices_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `invoices_ibfk_2` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`currency_id`);
+
+--
+-- Constraints for table `invoice_items`
+--
+ALTER TABLE `invoice_items`
+  ADD CONSTRAINT `invoice_items_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`invoice_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `invoice_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`invoice_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `personal_notes`
+--
+ALTER TABLE `personal_notes`
+  ADD CONSTRAINT `personal_notes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `fk_product_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`currency_id`),
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`tax_id`) REFERENCES `taxes` (`tax_id`);
+
+--
+-- Constraints for table `staff`
+--
+ALTER TABLE `staff`
+  ADD CONSTRAINT `fk_staff_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_staff_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `taxes`
+--
+ALTER TABLE `taxes`
+  ADD CONSTRAINT `fk_tax_company` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `taxes_ibfk_1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`currency_id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_users_client` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`) ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
